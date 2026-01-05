@@ -8,12 +8,12 @@ For this exercise we only had two stacks available we will call them A and B. At
 
 For it we have a limited amount of moves that we can use, printing in the terminal the executed move:
 
-- Rotate A **_(RA)_**
-- Rotate B **_(RB)_**
-- Rotate Both **_(RR)_**
-- Reverse Rotate A **_(RRA)_**
-- Reverse Rotate B **_(RRB)_**
-- Reverse Rotate Both **_(RRB)_**
+- Rotate A **_(ra)_**
+- Rotate B **_(rb)_**
+- Rotate Both **_(rr)_**
+- Reverse Rotate A **_(rra)_**
+- Reverse Rotate B **_(rrb)_**
+- Reverse Rotate Both **_(rrr)_**
 - Swap A **_(sa)_**
 - Swap B **_(sb)_**
 - Swap Both **_(ss)_**
