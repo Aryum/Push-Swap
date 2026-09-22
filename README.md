@@ -1,32 +1,56 @@
-# Push swap
-A program that takes multiple numbers and organizes them in ascending order. But only using two stacks and only having a few moves available. Meant to make us learn about sorting algorithms and adapt them to our needs.
+# Push Swap
 
-The program was not about computing power efficiency but to organize the numbers in the fewest moves possible.
+A sorting program restricted to two stacks and a small set of operations, meant to teach sorting-algorithm design under tight constraints — the goal isn't computational efficiency, but sorting the numbers in as few moves as possible.
 
-# Requirements
-For this exercise we only had two stacks available we will call them A and B. At the end of the program we are supposed to have all the numbers organized in stack A. 
+## About
 
-For it we have a limited amount of moves that we can use, printing in the terminal the executed move:
+Push Swap takes a list of integers as arguments and must sort them in ascending order using only two stacks, `A` and `B`, and a limited set of stack operations. All numbers must end up sorted in stack `A`.
 
-- Rotate A **_(ra)_**
-- Rotate B **_(rb)_**
-- Rotate Both **_(rr)_**
-- Reverse Rotate A **_(rra)_**
-- Reverse Rotate B **_(rrb)_**
-- Reverse Rotate Both **_(rrr)_**
-- Swap A **_(sa)_**
-- Swap B **_(sb)_**
-- Swap Both **_(ss)_**
-- Push A **_(pa)_**
-- PusH B **_(pb)_**
+## Available operations
 
-The exercise was graded depending on the amount of moves needed to sort them.
+| Move | Description |
+|:---:|---|
+| `sa` | Swap the first two elements of stack A |
+| `sb` | Swap the first two elements of stack B |
+| `ss` | Equivalent to `sa` and `sb` at the same time |
+| `pa` | Push the top of stack B onto stack A |
+| `pb` | Push the top of stack A onto stack B |
+| `ra` | Rotate stack A up (first element becomes last) |
+| `rb` | Rotate stack B up (first element becomes last) |
+| `rr` | Equivalent to `ra` and `rb` at the same time |
+| `rra` | Reverse-rotate stack A (last element becomes first) |
+| `rrb` | Reverse-rotate stack B (last element becomes first) |
+| `rrr` | Equivalent to `rra` and `rrb` at the same time |
 
-# My solution
-I decided to take a divide and conquer approach dividing the numbers in chunks pushing them to the stack B starting with the lower numbers and then pushing them back in a sorted way. 
+Each executed move is printed to the terminal.
 
-Even if this approach was already very effective we can do it better by doing some optimisations:
-- Pushing the chunks two by two, pushing the lower chunk to the end of stack B
-- When pushing the numbers back checking if is faster to push the one after it first and then do a swap
-- Checking what rotation it would be faster to push a number to the other stack
-- Checking if we can do the same move in both stacks
+## Compilation
+
+```bash
+make        # compiles the push_swap executable
+make clean  # removes object files
+make fclean # removes object files and the executable
+make re     # recompiles everything from scratch
+```
+
+## Running
+
+```bash
+./push_swap 5 3 8 1 9 2
+```
+
+## My approach
+
+The solution uses a **divide and conquer** strategy:
+
+1. Numbers are split into chunks and pushed onto stack `B`, starting with the chunk of lowest values.
+2. Once split, the chunks are pushed back onto stack `A` in sorted order.
+
+### Optimizations
+
+Beyond the base algorithm, a few optimizations were added to cut down on the number of moves:
+
+- **Chunking two at a time** — chunks are pushed to stack `B` in pairs, with the lower of the two placed at the end of the stack, reducing repositioning later.
+- **Look-ahead swaps** — when pushing numbers back, the algorithm checks whether it's cheaper to push the *next* number first and swap afterward, rather than always pushing in strict order.
+- **Cheapest rotation direction** — before pushing a number between stacks, the algorithm checks whether a normal or reverse rotation gets it there in fewer moves.
+- **Combined rotations** — whenever both stacks need to rotate in the same direction, `rr`/`rrr` is used instead of two separate moves.
