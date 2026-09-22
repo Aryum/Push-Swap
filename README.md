@@ -54,3 +54,5 @@ Beyond the base algorithm, a few optimizations were added to cut down on the num
 - **Look-ahead swaps** — when pushing numbers back, the algorithm checks whether it's cheaper to push the *next* number first and swap afterward, rather than always pushing in strict order.
 - **Cheapest rotation direction** — before pushing a number between stacks, the algorithm checks whether a normal or reverse rotation gets it there in fewer moves.
 - **Combined rotations** — whenever both stacks need to rotate in the same direction, `rr`/`rrr` is used instead of two separate moves.
+
+*This project was done as part of the 42 curriculum.*
